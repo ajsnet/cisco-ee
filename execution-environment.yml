@@ -1,0 +1,76 @@
+---
+
+version: 3
+images:
+  base_image:
+    name: quay.io/centos/centos:stream10
+dependencies:
+  ansible_core:
+    package_pip: ansible-core
+  ansible_runner:
+    package_pip: ansible-runner
+  system:
+    - git-core
+    - openssh-clients
+    - sshpass
+    - rust
+    - cargo
+    - gcc
+    - python-devel
+  galaxy:
+    collections:
+    - name: ansible.posix
+    - name: ansible.utils
+    - name: cisco.aci
+    - name: cisco.catalystcenter
+    - name: cisco.cdo
+# cml/virl excluded due to out of date hard dependencies
+#    - name: cisco.cml
+    - name: cisco.csdac
+    - name: cisco.dcnm
+    - name: cisco.dnac
+    - name: cisco.intersight
+    - name: cisco.ios
+    - name: cisco.iosxr
+    - name: cisco.ise
+    - name: cisco.meraki
+    - name: cisco.mso
+    - name: cisco.nac_dc_vxlan
+    - name: cisco.nae
+    - name: cisco.nd
+    - name: cisco.nso
+    - name: cisco.nxos
+# sdwan excluded due to out of date hard dependencies
+#    - name: cisco.sdwan
+#    - name: cisco.sdwan_deployment
+    - name: cisco.secureworkload
+    - name: cisco.sonic
+    - name: cisco.ucs
+# hard-coded version conflicts found in these packages, so we just exclude the req. and install latest
+  exclude:
+    python:
+      - packaging
+      - annotated-types
+#      - requests-toolbelt
+#      - azure-cli-core
+#      - azure-common
+#      - azure-containerregistry
+#      - azure-core
+#      - azure-identity
+  python:
+    - packaging
+    - annotated-types
+#    - requests-toolbelt
+#    - azure-cli-core
+#    - azure-common
+#    - azure-containerregistry
+#    - azure-core
+#    - azure-identity
+
+additional_build_steps:
+  prepend_base:
+    - RUN dnf install -y python3 python3-pip python3-libdnf
+    - RUN dnf config-manager --set-enabled crb
+    - RUN dnf install -y epel-release
+  append_base:
+    - RUN $PYCMD -m pip install -U pip
