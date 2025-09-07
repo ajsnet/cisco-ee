@@ -1,6 +1,8 @@
 AWX / Ansible Automation Platform - Cisco Execution Environment
 =========
-Here you will find various Execution Environments for AWX (should also work with RHEL Ansible Automation Platform although 'AWX' will be used as a stand in for both going forward since AWX is the upstream open source behind RHEL AAP).  Also included are the relevant exeuction-environment.yml files necessary to build them yourself if you wish to customize to public to your own repo.
+Here you will find various Execution Environments for AWX.  Also included are the relevant exeuction-environment.yml files necessary to build them yourself if you wish to customize to publish to a private repo.
+
+NOTE: AWX is the upstream open-source software behind Redhat Enterprise Linux - Ansible Automation Platform.  This documentation uses "AWX" to refer to all AWX-compatible platforms, which likely includes RHEL AAP in most cases.
 
 High Level Requirements
 ------------
