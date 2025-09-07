@@ -1,0 +1,33 @@
+---
+version: 3
+images:
+  base_image:
+    name: quay.io/centos/centos:stream9
+dependencies:
+  ansible_core:
+    package_pip: ansible-core
+  ansible_runner:
+    package_pip: ansible-runner
+  system:
+#    - git-core
+    - openssh-clients
+    - sshpass
+#    - rust
+#    - cargo
+#    - gcc
+#    - python-devel
+  galaxy:
+    collections:
+    - name: cisco.dcnm
+    - name: cisco.mso
+    - name: cisco.nd
+    - name: cisco.nxos
+    - name: cisco.aci
+
+additional_build_steps:
+  prepend_base:
+    - RUN dnf install -y python3 python3-pip python3-libdnf
+    - RUN dnf config-manager --set-enabled crb
+#    - RUN dnf install -y epel-release
+  append_base:
+    - RUN $PYCMD -m pip install -U pip
