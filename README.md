@@ -1,4 +1,4 @@
-AWX / AAP - Cisco Execution Environment
+AWX / AAP - Cisco DC Execution Environment
 =========
 This project is intended to provide an easily accessible EE that includes modern Cisco Data Center Ansible Galaxy Collections.
 
